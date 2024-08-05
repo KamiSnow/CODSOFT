@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Search</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for food..." id="searchInput" onkeyup="searchFood()">
+    </div>
+    
+    <div class="category-section">
+        <div class="category" onclick="filterCategory('all')">All</div>
+        <div class="category" onclick="filterCategory('Sandwiches')">Sandwiches</div>
+        <div class="category" onclick="filterCategory('Chicken')">Chicken</div>
+        <div class="category" onclick="filterCategory('Salads')">Salads</div>
+        <div class="category" onclick="filterCategory('Drinks')">Drinks</div>
+        <div class="category" onclick="filterCategory('Desserts')">Desserts</div>
+        <div class="category" onclick="filterCategory('Pasta')">Pasta</div>
+        <div class="category" onclick="filterCategory('Seafood')">Seafood</div>
+    </div>
+
+    <div class="item-grid" id="itemGrid">
+        <!-- Sample food items -->
+        <div class="item" data-category="Sandwiches" onclick="showPopup('turkey_sandwich.png', 'A delicious sandwich with turkey, cheese, and lettuce.')">
+            <img src="turkey_sandwich.png" alt="Turkey Sandwich">
+            <div class="item-title">Turkey Sandwich</div>
+        </div>
+        <div class="item" data-category="Chicken" onclick="showPopup('grilled_chicken.png', 'Grilled chicken breast with herbs and spices.')">
+            <img src="grilled_chicken.png" alt="Grilled Chicken">
+            <div class="item-title">Grilled Chicken</div>
+        </div>
+        <div class="item" data-category="Salads" onclick="showPopup('green_salad.png', 'Fresh green salad with tomatoes, cucumbers, and dressing.')">
+            <img src="green_salad.png" alt="Green Salad">
+            <div class="item-title">Green Salad</div>
+        </div>
+        <div class="item" data-category="Drinks" onclick="showPopup('lemonade.png', 'Refreshing lemonade.')">
+            <img src="lemonade.png" alt="Lemonade">
+            <div class="item-title">Lemonade</div>
+        </div>
+        <div class="item" data-category="Desserts" onclick="showPopup('chocolate_cake.png', 'Chocolate cake with creamy frosting.')">
+            <img src="chocolate_cake.png" alt="Chocolate Cake">
+            <div class="item-title">Chocolate Cake</div>
+        </div>
+        <div class="item" data-category="Sandwiches" onclick="showPopup('hamburger.png', 'A classic hamburger with all the fixings.')">
+            <img src="hamburger.png" alt="Hamburger">
+            <div class="item-title">Hamburger</div>
+        </div>
+        <div class="item" data-category="Pasta" onclick="showPopup('pasta_carbonara.png', 'Classic Italian pasta carbonara.')">
+            <img src="pasta_carbonara.png" alt="Pasta Carbonara">
+            <div class="item-title">Pasta Carbonara</div>
+        </div>
+        <div class="item" data-category="Salads" onclick="showPopup('caesar_salad.png', 'Caesar salad with croutons and dressing.')">
+            <img src="caesar_salad.png" alt="Caesar Salad">
+            <div class="item-title">Caesar Salad</div>
+        </div>
+        <div class="item" data-category="Seafood" onclick="showPopup('seafood_platter.png', 'A variety of fresh seafood including shrimp, crab, and oysters.')">
+            <img src="seafood_platter.png" alt="Seafood Platter">
+            <div class="item-title">Seafood Platter</div>
+        </div>
+        <div class="item" data-category="Salads" onclick="showPopup('fruit_salad.png', 'A mix of fresh seasonal fruits.')">
+            <img src="fruit_salad.png" alt="Fruit Salad">
+            <div class="item-title">Fruit Salad</div>
+        </div>
+        <div class="item" data-category="Drinks" onclick="showPopup('smoothie.png', 'A refreshing berry smoothie.')">
+            <img src="smoothie.png" alt="Berry Smoothie">
+            <div class="item-title">Berry Smoothie</div>
+        </div>
+        <div class="item" data-category="Sandwiches" onclick="showPopup('vegan_burger.png', 'A tasty vegan burger made with plant-based ingredients.')">
+            <img src="vegan_burger.png" alt="Vegan Burger">
+            <div class="item-title">Vegan Burger</div>
+        </div>
+        <div class="item" data-category="Chicken" onclick="showPopup('steak.png', 'Grilled steak cooked to perfection.')">
+            <img src="steak.png" alt="Grilled Steak">
+            <div class="item-title">Grilled Steak</div>
+        </div>
+        <div class="item" data-category="Desserts" onclick="showPopup('tiramisu.png', 'Classic Italian tiramisu dessert.')">
+            <img src="tiramisu.png" alt="Tiramisu">
+            <div class="item-title">Tiramisu</div>
+        </div>
+        <div class="item" data-category="Pasta" onclick="showPopup('margarita_pizza.png', 'Margarita pizza with fresh basil and mozzarella.')">
+            <img src="margarita_pizza.png" alt="Margarita Pizza">
+            <div class="item-title">Margarita Pizza</div>
+        </div>
+    </div>
+
+    <div id="itemPopup" class="popup">
+        <div class="popup-content">
+            <img id="popupImage" src="" alt="Popup Image">
+            <div id="popupDescription" class="popup-description"></div>
+            <button class="close-btn" onclick="addToCart()">Add to Cart</button>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(imageSrc, description) {
+            document.getElementById('popupImage').src = imageSrc;
+            document.getElementById('popupDescription').innerText = description;
+            document.getElementById('itemPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('itemPopup').style.display = 'none';
+        }
+
+        function searchFood() {
+            var input, filter, itemGrid, items, itemTitle, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            itemGrid = document.getElementById('itemGrid');
+            items = itemGrid.getElementsByClassName('item');
+
+            for (i = 0; i < items.length; i++) {
+                itemTitle = items[i].getElementsByClassName('item-title')[0];
+                txtValue = itemTitle.textContent || itemTitle.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterCategory(category) {
+            var itemGrid, items, i;
+            itemGrid = document.getElementById('itemGrid');
+            items = itemGrid.getElementsByClassName('item');
+
+            for (i = 0; i < items.length; i++) {
+                if (category === 'all') {
+                    items[i].style.display = "";
+                } else {
+                    if (items[i].getAttribute('data-category') === category) {
+                        items[i].style.display = "";
+                    } else {
+                        items[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function addToCart() {
+            alert("Item added to cart!");
+        }
+    </script>
+</body>
+</html>

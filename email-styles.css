@@ -1,0 +1,188 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2a2e30;
+    font-family: Arial, sans-serif;
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Ensure it takes at least the full viewport height */
+}
+
+.wrapper {
+    width: 100%;
+    table-layout: fixed;
+    background-color: #345c72;
+    padding: 20px 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%; /* Ensure table takes full width of container */
+    max-width: 600px; /* Limit max width */
+}
+
+/* Center the content in the wrapper */
+.content {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ff9e7a;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    background-color: #345c72; /* Changed to keep consistency */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center; /* Center text and image horizontally */
+    padding: 20px 0; /* Add padding to create space around the hero */
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Body Section */
+.body {
+    padding: 20px;
+}
+
+.body h2 {
+    color: #333333;
+}
+
+.body p {
+    color: #666666;
+}
+
+.body ul {
+    padding-left: 20px;
+}
+
+.body ul li {
+    color: #666666;
+}
+
+.body table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.body table td {
+    vertical-align: top;
+    padding: 10px;
+}
+
+.body h3 {
+    color: #333333;
+}
+
+/* Columns Section */
+.columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Ensure columns have space between them on larger screens */
+.column + .column {
+    margin-left: 20px;
+}
+
+.column h3 {
+    color: #333333;
+}
+
+.column p {
+    color: #666666;
+}
+
+/* Call to Action */
+.cta {
+    text-align: center;
+    padding: 20px;
+}
+
+.button {
+    background-color: #2a2e30;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Footer */
+.footer {
+    background-color: #333333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+    .body table {
+        display: block;
+    }
+    .body table td {
+        display: block;
+        width: 100%;
+    }
+    .cta .button {
+        display: block;
+        width: auto;
+        margin: 0 auto;
+    }
+    .content {
+        padding: 10px;
+    }
+    .header, .body, .cta, .footer {
+        padding: 10px;
+    }
+    .columns {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .hero img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .header, .body, .cta, .footer {
+        padding: 5px;
+    }
+    .button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
